@@ -1,13 +1,17 @@
-#!name=Locket_Gold
-#!desc=Crack Gold
-#!author=Luonghiii
+#!name = Locket_Gold
+#!desc = Crack Gold
+#!author = Luonghiii
 
 [Script]
 # ~ By Luonghiii
 # ～ Egern transfer to Shadowrocket & Surge & LanceX
+
+# RevenueCat response patch (gắn script JS để sửa body của responses)
 revenuecat = type=http-response, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$), script-path=https://raw.githubusercontent.com/Luonghiii/Locket/main/js/Locket_Gold.js, requires-body=true, max-size=-1, timeout=60
 
+# Xóa header request trước khi tới RevenueCat (nếu cần)
 deleteHeader = type=http-request, pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts|subscribers), script-path=https://raw.githubusercontent.com/Luonghiii/Locket/main/js/deleteHeader.js, timeout=60
 
 [MITM]
+# Bật MITM cho host của RevenueCat (bổ sung thêm nếu cần)
 hostname = %APPEND% api.revenuecat.com
